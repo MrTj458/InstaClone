@@ -1,21 +1,25 @@
 import React from 'react'
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
+import GlobalStyle from './styles/GlobalStyle'
 import Home from './Home'
 import NotFound from './404'
 
 export default function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
+    <>
+      <GlobalStyle />
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
 
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
-    </Router>
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   )
 }
