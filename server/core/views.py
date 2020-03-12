@@ -13,6 +13,8 @@ class UserViewSet(GenericViewSet, CreateModelMixin):
 
 
 class AuthViewSet(GenericViewSet):
+    serializer_class = UserSerializer
+
     def list(self, request):
         """Get the currently authenticated user"""
         if request.user.is_anonymous:
