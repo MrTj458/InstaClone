@@ -7,9 +7,21 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserSerializer, LoginSerializer
 
 
-class UserViewSet(GenericViewSet, CreateModelMixin):
-    """Register new users"""
+class UserViewSet(GenericViewSet):
     serializer_class = UserSerializer
+
+    def create(self, request):
+        """Register a new user"""
+        serialized_user = UserSerializer(data=request.data)
+        serialized_user.is_valid(raise_exception=True)
+        user = serialized_user.save()
+        refresh = RefreshToken.for_user(user)
+
+        return Response({
+            'user': serialized_user.validated_data,
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        })
 
 
 class AuthViewSet(GenericViewSet):
