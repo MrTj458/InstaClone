@@ -8,9 +8,10 @@ from . import views
 
 router = DefaultRouter()
 
-router.register('', views.AuthApi, basename='auth')
+router.register('auth', views.AuthViewSet, basename='auth')
+router.register('users', views.UserViewSet, basename='users')
 
 urlpatterns = [
-    path('auth/', include(router.urls)),
+    path('', include(router.urls)),
     path('auth/refresh/', TokenRefreshView.as_view(), name='token_refresh')
 ]

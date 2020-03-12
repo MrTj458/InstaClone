@@ -1,12 +1,18 @@
-from django.shortcuts import render
+from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.mixins import CreateModelMixin
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import UserSerializer, LoginSerializer
 
 
-class AuthApi(GenericViewSet):
+class UserViewSet(GenericViewSet, CreateModelMixin):
+    """Register new users"""
+    serializer_class = UserSerializer
+
+
+class AuthViewSet(GenericViewSet):
     def list(self, request):
         """Get the currently authenticated user"""
         if request.user.is_anonymous:
