@@ -1,13 +1,16 @@
 from django.contrib.auth import get_user_model
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import CreateModelMixin
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import UserSerializer, LoginSerializer
+from .permissions import UserViewPermissions
 
 
 class UserViewSet(GenericViewSet):
+    permission_classes = [UserViewPermissions]
     serializer_class = UserSerializer
 
     def create(self, request):
@@ -22,6 +25,13 @@ class UserViewSet(GenericViewSet):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         })
+
+    def destroy(self, request, pk=None):
+        """Deactivate user account"""
+        user = request.user
+        user.is_active = False
+        user.save()
+        return Response(None, status.HTTP_204_NO_CONTENT)
 
 
 class AuthViewSet(GenericViewSet):
