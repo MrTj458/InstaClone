@@ -7,3 +7,9 @@ class PostsPermissions(BasePermission):
             return True
 
         return not request.user.is_anonymous
+
+    def has_object_permission(self, request, view, obj):
+        if view.action in ['update', 'partial_update', 'destroy'] and request.user != obj.author:
+            return False
+
+        return True
