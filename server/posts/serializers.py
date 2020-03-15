@@ -10,11 +10,13 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
-        read_only_fields = ['likes', 'author']
+        read_only_fields = ['likes', 'author', 'created_at']
 
 
 class PostUpdateSerializer(serializers.ModelSerializer):
+    author = UserSerializer(read_only=True)
+
     class Meta:
         model = Post
         fields = '__all__'
-        read_only_fields = ['likes', 'image', 'author', 'created_at']
+        read_only_fields = ['likes', 'author', 'created_at', 'image']
