@@ -1,4 +1,6 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { userSelector } from '../state/userSlice'
 
 import styled from 'styled-components'
 
@@ -9,9 +11,12 @@ const Header = styled.div`
 `
 
 export default function Home() {
+  const { user } = useSelector(userSelector)
+
   return (
     <>
       <Header>Home Page!</Header>
+      <p>Welcome {user.username}</p>
     </>
   )
 }

@@ -1,13 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import './utils/axiosSetup'
 
 import store from './state/store'
 import App from './components/App'
+import FetchUser from './components/FetchUser'
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <FetchUser>
+      <App />
+    </FetchUser>
   </Provider>,
   document.getElementById('root')
 )

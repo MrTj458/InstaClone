@@ -40,7 +40,7 @@ class AuthViewSet(GenericViewSet):
     def list(self, request):
         """Get the currently authenticated user"""
         if request.user.is_anonymous:
-            return Response({'user': {}})
+            return Response({})
 
         user = UserSerializer(request.user)
         return Response(user.data)
