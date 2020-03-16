@@ -5,7 +5,7 @@ import { fetchUser, userSelector } from '../state/userSlice'
 
 export default function FetchUser({ children }) {
   const dispatch = useDispatch()
-  const { user, loading } = useSelector(userSelector)
+  const { user } = useSelector(userSelector)
 
   useEffect(() => {
     if (user === null) {
@@ -13,7 +13,7 @@ export default function FetchUser({ children }) {
     }
   }, [dispatch, user])
 
-  if (user === null || loading) {
+  if (user === null) {
     return <h1>Loading...</h1>
   }
 
