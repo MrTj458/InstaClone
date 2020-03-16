@@ -40,11 +40,20 @@ export function fetchUser() {
 }
 
 export function loginUser(user, history) {
+  return postUser(user, history, '/auth/')
+}
+
+export function registerUser(user, history) {
+  return postUser(user, history, '/users/')
+}
+
+// Register or log in a user
+function postUser(user, history, route) {
   return async dispatch => {
     dispatch(userLoading())
 
     try {
-      const res = await axios.post('/auth/', user)
+      const res = await axios.post(route, user)
       const data = res.data
 
       localStorage.setItem('access', data.access)

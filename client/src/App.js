@@ -1,10 +1,10 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import GlobalStyle from './styles/GlobalStyle'
-import Home from './Home'
-import NotFound from './404'
-import Login from './Login'
+import GlobalStyle from './components/styles/GlobalStyle'
+import Home from './pages/Home'
+import NotFound from './pages/404'
+import AuthPage from './pages/AuthPage'
 
 export default function App() {
   return (
@@ -17,7 +17,10 @@ export default function App() {
           </Route>
 
           <Route exact path="/login">
-            <Login />
+            <AuthPage />
+          </Route>
+          <Route exact path="/register">
+            <AuthPage register={true} />
           </Route>
 
           <Route path="*">

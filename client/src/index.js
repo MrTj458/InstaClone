@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import './utils/axiosSetup'
 
 import store from './state/store'
-import App from './components/App'
+import App from './App'
 import FetchUser from './components/FetchUser'
 
 ReactDOM.render(
