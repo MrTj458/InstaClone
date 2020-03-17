@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import GlobalStyle from './components/styles/GlobalStyle'
 import Home from './pages/Home'
 import NotFound from './pages/404'
 import AuthPage from './pages/AuthPage'
@@ -9,7 +8,6 @@ import AuthPage from './pages/AuthPage'
 export default function App() {
   return (
     <>
-      <GlobalStyle />
       <Router>
         <Switch>
           <Route exact path="/">

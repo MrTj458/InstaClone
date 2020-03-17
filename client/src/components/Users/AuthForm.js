@@ -4,13 +4,67 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { loginUser, userSelector, registerUser } from '../../state/userSlice'
+import Spinner from '../Spinner'
+import { Button, Input } from '../styles'
 
-const Input = styled.input`
-  display: block;
+const FormControl = styled.div`
+  margin-bottom: 20px;
 `
 
-const Button = styled.button`
+const ToggleButton = styled.button`
   display: block;
+  margin-top: 20px;
+  border: 0;
+  background: 0;
+  text-decoration: underline;
+  width: 100%;
+  cursor: pointer;
+
+  :hover {
+    transform: scale(1.01);
+  }
+`
+
+const ErrorText = styled.p`
+  color: red;
+  text-align: center;
+  margin-bottom: 5px;
+`
+
+const Title = styled.h1`
+  font-family: 'Pacifico', cursive;
+  font-size: 48px;
+  font-weight: normal;
+`
+
+const Text = styled.p`
+  color: #999;
+  margin-bottom: 30px;
+`
+
+const AuthContainer = styled.div`
+  border: 1px solid #dbdbdb;
+  background-color: #fff;
+  border-radius: 2px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+  margin-top: 40px;
+
+  form {
+    width: 100%;
+  }
+
+  fieldset {
+    border: 0;
+  }
+
+  small {
+    color: red;
+  }
 `
 
 export default function AuthForm({ register }) {
@@ -47,62 +101,84 @@ export default function AuthForm({ register }) {
   }
 
   return (
-    <>
-      <h1>{registering ? 'Register' : 'Login'}</h1>
-      {errors.authentication && <p>{errors.authentication[0]}</p>}
+    <AuthContainer>
+      <Title>Instaclone</Title>
+      <Text>Check out pics and stuff.</Text>
       <form onSubmit={handleSubmit}>
+        {errors.authentication && (
+          <ErrorText>{errors.authentication[0]}</ErrorText>
+        )}
         <fieldset disabled={loading}>
-          <Input
-            ref={inputRef}
-            type="text"
-            name="username"
-            value={user.username}
-            onChange={handleChange}
-            placeholder="Username"
-          />
-          {errors.username && <small>{errors.username[0]}</small>}
+          <FormControl>
+            <Input
+              ref={inputRef}
+              type="text"
+              name="username"
+              value={user.username}
+              onChange={handleChange}
+              placeholder="Username"
+              error={!!errors.username}
+            />
+            {errors.username && <small>{errors.username[0]}</small>}
+          </FormControl>
           {registering && (
-            <>
+            <FormControl>
               <Input
                 type="text"
                 name="email"
                 value={user.email}
                 onChange={handleChange}
                 placeholder="Email"
+                error={!!errors.email}
               />
               {errors.email && <small>{errors.email[0]}</small>}
-            </>
+            </FormControl>
           )}
-          <Input
-            type="password"
-            name="password"
-            onChange={handleChange}
-            value={user.password}
-            placeholder="password"
-          />
-          {errors.password && <small>{errors.password[0]}</small>}
+          <FormControl>
+            <Input
+              type="password"
+              name="password"
+              onChange={handleChange}
+              value={user.password}
+              placeholder="password"
+              error={!!errors.password}
+            />
+            {errors.password && <small>{errors.password[0]}</small>}
+          </FormControl>
           {registering && (
-            <>
+            <FormControl>
               <Input
                 type="password"
                 name="password2"
                 value={user.password2}
                 onChange={handleChange}
                 placeholder="Confirm Password"
+                error={user.password !== user.password2}
               />
               {user.password !== user.password2 && (
                 <small>Passwords do not match.</small>
               )}
-            </>
+            </FormControl>
           )}
-          <Button type="submit">{register ? 'Register' : 'Login'}</Button>
-          <Button type="button" onClick={() => setRegistering(!registering)}>
+          <Button fill type="submit">
+            {loading ? (
+              <Spinner color="#fff" />
+            ) : registering ? (
+              'Register'
+            ) : (
+              'Login'
+            )}
+          </Button>
+          <ToggleButton
+            type="button"
+            onClick={() => setRegistering(!registering)}
+          >
             {registering
               ? 'Already have an account? Login'
               : 'Need an account? Register'}
-          </Button>
+          </ToggleButton>
         </fieldset>
       </form>
-    </>
+    </AuthContainer>
   )
 }
