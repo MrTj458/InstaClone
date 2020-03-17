@@ -85,7 +85,7 @@ export default function AuthForm({ register }) {
 
   useEffect(() => {
     inputRef.current.focus()
-  }, [])
+  }, [registering])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -142,7 +142,7 @@ export default function AuthForm({ register }) {
               name="password"
               onChange={handleChange}
               value={user.password}
-              placeholder="password"
+              placeholder="Password"
               error={!!errors.password}
             />
             {errors.password && <small>{errors.password[0]}</small>}
