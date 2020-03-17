@@ -1,8 +1,6 @@
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
-axios.defaults.baseURL = 'http://localhost:8000/api'
-
 axios.interceptors.request.use(
   async config => {
     let accessToken = localStorage.getItem('access')
@@ -17,7 +15,7 @@ axios.interceptors.request.use(
 
         // Get the new access token with the refresh token
         const refresh = localStorage.getItem('refresh')
-        const res = await axios.post('/auth/refresh/', { refresh })
+        const res = await axios.post('/api/auth/refresh/', { refresh })
         const { access } = res.data
 
         localStorage.setItem('access', access)

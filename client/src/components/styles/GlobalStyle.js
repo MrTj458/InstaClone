@@ -9,11 +9,16 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    background-color: #f2f2f2;
+    min-height: 100vh;
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f2f2f2;
-    min-height: 100vh;
   }
 `
 

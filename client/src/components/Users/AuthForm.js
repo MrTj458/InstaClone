@@ -20,8 +20,9 @@ const ToggleButton = styled.button`
   width: 100%;
   cursor: pointer;
 
-  :hover {
-    transform: scale(1.01);
+  :active,
+  :focus {
+    outline: none;
   }
 `
 
@@ -46,13 +47,14 @@ const AuthContainer = styled.div`
   border: 1px solid #dbdbdb;
   background-color: #fff;
   border-radius: 2px;
-  width: 400px;
+  width: calc(100% - 10px);
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px 30px;
-  margin-top: 40px;
+  margin: 40px 5px;
 
   form {
     width: 100%;
@@ -160,7 +162,7 @@ export default function AuthForm({ register }) {
               )}
             </FormControl>
           )}
-          <Button fill type="submit">
+          <Button fill="true" type="submit">
             {loading ? (
               <Spinner color="#fff" />
             ) : registering ? (

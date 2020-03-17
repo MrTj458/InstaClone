@@ -29,7 +29,7 @@ export function fetchUser() {
     dispatch(userLoading())
 
     try {
-      const res = await axios.get('/auth/')
+      const res = await axios.get('/api/auth/')
       const user = res.data
 
       dispatch(getUserSuccess(user))
@@ -40,11 +40,11 @@ export function fetchUser() {
 }
 
 export function loginUser(user, history) {
-  return postUser(user, history, '/auth/')
+  return postUser(user, history, '/api/auth/')
 }
 
 export function registerUser(user, history) {
-  return postUser(user, history, '/users/')
+  return postUser(user, history, '/api/users/')
 }
 
 // Register or log in a user

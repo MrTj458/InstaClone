@@ -1,31 +1,19 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Provider } from 'react-redux'
 
-import Home from './pages/Home'
-import NotFound from './pages/404'
-import AuthPage from './pages/AuthPage'
+import store from './state/store'
+import Routes from './pages/Routes'
+import FetchUser from './components/Users/FetchUser'
+import GlobalStyle from './components/styles/GlobalStyle'
 
 export default function App() {
   return (
-    <>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
+    <Provider store={store}>
+      <GlobalStyle />
 
-          <Route exact path="/login">
-            <AuthPage />
-          </Route>
-          <Route exact path="/register">
-            <AuthPage register={true} />
-          </Route>
-
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
-      </Router>
-    </>
+      <FetchUser>
+        <Routes />
+      </FetchUser>
+    </Provider>
   )
 }

@@ -11,8 +11,9 @@ export const Button = styled.button`
   cursor: pointer;
   width: ${props => (props.fill ? '100%' : 'auto')};
 
-  :hover {
-    transform: scale(1.01);
+  :active,
+  :focus {
+    outline: none;
   }
 `
 

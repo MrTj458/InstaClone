@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-import { fetchUser, userSelector } from '../state/userSlice'
-import Spinner from './Spinner'
+import { fetchUser, userSelector } from '../../state/userSlice'
+import Spinner from '../Spinner'
 
 const LoadingScreen = styled.div`
   width: 100vw;
