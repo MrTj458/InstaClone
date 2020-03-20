@@ -21,7 +21,7 @@ class UserViewSet(GenericViewSet):
         refresh = RefreshToken.for_user(user)
 
         return Response({
-            'user': serialized_user.validated_data,
+            'user': serialized_user.data,
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         })
