@@ -2,16 +2,18 @@ from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.mixins import CreateModelMixin
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import UserSerializer, LoginSerializer
 from .permissions import UserViewPermissions
 
 
-class UserViewSet(GenericViewSet):
+class UserViewSet(GenericViewSet, RetrieveModelMixin):
     permission_classes = [UserViewPermissions]
     serializer_class = UserSerializer
+    queryset = get_user_model().objects.all()
+    lookup_field = 'username'
 
     def create(self, request):
         """Register a new user"""

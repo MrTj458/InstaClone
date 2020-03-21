@@ -7,6 +7,6 @@ class UserViewPermissions(BasePermission):
             """Allow anyone to create an account"""
             return True
 
-        if view.action in ['destroy']:
+        if view.action in ['destroy', 'retrieve']:
             """Only authorized users can delete their account"""
             return not request.user.is_anonymous

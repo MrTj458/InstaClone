@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './Home'
 import AuthPage from './AuthPage'
 import NotFound from './404'
+import ProfilePage from './ProfilePage'
 
 export default function Routes() {
   return (
@@ -20,6 +21,11 @@ export default function Routes() {
         </Route>
         <Route exact path="/register">
           <AuthPage register={true} />
+        </Route>
+
+        {/* Profile Routes */}
+        <Route exact path="/:username">
+          <ProfilePage />
         </Route>
 
         {/* 404 route */}

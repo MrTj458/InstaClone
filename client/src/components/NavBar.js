@@ -78,7 +78,7 @@ export default function NavBar() {
               <NavLink style={{ marginLeft: '10px' }} to="/">
                 <i className="fas fa-plus fa-2x"></i>
               </NavLink>
-              <NavLink to="/">
+              <NavLink to={`/${user.username}`}>
                 <Avatar src={user.profile.image} alt="Profile" />
               </NavLink>
             </>
