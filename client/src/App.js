@@ -7,6 +7,13 @@ import Routes from './pages/Routes'
 import FetchUser from './components/Users/FetchUser'
 import NavBar from './components/NavBar'
 import GlobalStyle from './components/styles/GlobalStyle'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto;
+`
 
 export default function App() {
   return (
@@ -16,7 +23,9 @@ export default function App() {
       <FetchUser>
         <Router>
           <NavBar />
-          <Routes />
+          <Container>
+            <Routes />
+          </Container>
         </Router>
       </FetchUser>
     </Provider>

@@ -54,7 +54,7 @@ const AuthContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px 30px;
-  margin: 40px 5px;
+  margin: 0 5px;
 
   form {
     width: 100%;

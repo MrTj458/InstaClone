@@ -42,7 +42,7 @@ const NavLink = styled(Link)`
 `
 
 const NavButton = styled(Button)`
-  margin-left: 15px;
+  margin-left: 10px;
 `
 
 const Avatar = styled.img`
@@ -74,9 +74,14 @@ export default function NavBar() {
           </NavLink>
           {user.id ? (
             // Logged in links
-            <NavLink to="/">
-              <Avatar src={user.profile.image} alt="Profile" />
-            </NavLink>
+            <>
+              <NavLink style={{ marginLeft: '10px' }} to="/">
+                <i className="fas fa-plus fa-2x"></i>
+              </NavLink>
+              <NavLink to="/">
+                <Avatar src={user.profile.image} alt="Profile" />
+              </NavLink>
+            </>
           ) : (
             // Anonymous links
             <NavLink to="/login">
