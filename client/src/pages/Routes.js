@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 import Home from './Home'
 import AuthPage from './AuthPage'
@@ -8,7 +8,7 @@ import NotFound from './404'
 
 export default function Routes() {
   return (
-    <Router>
+    <>
       <Switch>
         <Route exact path="/">
           <Home />
@@ -27,6 +27,6 @@ export default function Routes() {
           <NotFound />
         </Route>
       </Switch>
-    </Router>
+    </>
   )
 }

@@ -1,9 +1,11 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import store from './state/store'
 import Routes from './pages/Routes'
 import FetchUser from './components/Users/FetchUser'
+import NavBar from './components/NavBar'
 import GlobalStyle from './components/styles/GlobalStyle'
 
 export default function App() {
@@ -12,7 +14,10 @@ export default function App() {
       <GlobalStyle />
 
       <FetchUser>
-        <Routes />
+        <Router>
+          <NavBar />
+          <Routes />
+        </Router>
       </FetchUser>
     </Provider>
   )

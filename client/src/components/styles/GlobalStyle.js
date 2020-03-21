@@ -10,7 +10,6 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: #f2f2f2;
-    min-height: 100vh;
   }
 
   #root {

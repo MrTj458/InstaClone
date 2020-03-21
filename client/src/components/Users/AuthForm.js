@@ -168,7 +168,7 @@ export default function AuthForm({ register }) {
             ) : registering ? (
               'Register'
             ) : (
-              'Login'
+              'Log In'
             )}
           </Button>
           <ToggleButton
@@ -176,7 +176,7 @@ export default function AuthForm({ register }) {
             onClick={() => setRegistering(!registering)}
           >
             {registering
-              ? 'Already have an account? Login'
+              ? 'Already have an account? Log In'
               : 'Need an account? Register'}
           </ToggleButton>
         </fieldset>
