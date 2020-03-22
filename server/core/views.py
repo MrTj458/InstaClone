@@ -17,7 +17,8 @@ class UserViewSet(GenericViewSet, RetrieveModelMixin):
 
     def create(self, request):
         """Register a new user"""
-        serialized_user = UserSerializer(data=request.data)
+        serialized_user = UserSerializer(
+            data=request.data, context={'request': request})
         serialized_user.is_valid(raise_exception=True)
         user = serialized_user.save()
         refresh = RefreshToken.for_user(user)
@@ -44,12 +45,13 @@ class AuthViewSet(GenericViewSet):
         if request.user.is_anonymous:
             return Response({})
 
-        user = UserSerializer(request.user)
+        user = UserSerializer(request.user, context={'request': request})
         return Response(user.data)
 
     def create(self, request):
         """Log in a user"""
-        serialized_login = LoginSerializer(data=request.data)
+        serialized_login = LoginSerializer(
+            data=request.data, context={'request': request})
         serialized_login.is_valid(raise_exception=True)
         user = serialized_login.validated_data
         refresh = RefreshToken.for_user(user)
