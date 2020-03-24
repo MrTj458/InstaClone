@@ -24,7 +24,7 @@ export const { getPostSuccess, getPostError, postLoading } = postSlice.actions
 export const postSelector = state => state.post
 export default postSlice.reducer
 
-export function createPost(formData) {
+export function createPost(formData, history) {
   return async dispatch => {
     dispatch(postLoading())
 
@@ -37,6 +37,7 @@ export function createPost(formData) {
       const data = res.data
 
       dispatch(getPostSuccess(data))
+      history.push('/')
     } catch (err) {
       dispatch(getPostError(err.response.data))
     }

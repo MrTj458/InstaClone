@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { useDispatch } from 'react-redux'
 import { postSelector, createPost } from '../../state/postSlice'
+import { useHistory } from 'react-router-dom'
 
 import { Button, FormControl } from '../styles'
 
@@ -13,6 +14,7 @@ const Container = styled.div`
 `
 
 export default function PostForm() {
+  const history = useHistory()
   const dispatch = useDispatch(postSelector)
   const [description, setDescription] = useState('')
   const fileRef = useRef(null)
@@ -24,7 +26,7 @@ export default function PostForm() {
     formData.append('description', description)
     formData.append('image', fileRef.current.files[0])
 
-    dispatch(createPost(formData))
+    dispatch(createPost(formData, history))
   }
 
   return (
