@@ -15,11 +15,17 @@ axios.interceptors.request.use(
 
         // Get the new access token with the refresh token
         const refresh = localStorage.getItem('refresh')
-        const res = await axios.post('/api/auth/refresh/', { refresh })
-        const { access } = res.data
+        try {
+          const res = await axios.post('/api/auth/refresh/', { refresh })
+          const { access } = res.data
 
-        localStorage.setItem('access', access)
-        accessToken = access
+          localStorage.setItem('access', access)
+          accessToken = access
+        } catch (err) {
+          localStorage.removeItem('refresh')
+          localStorage.removeItem('access')
+          window.location.reload()
+        }
       }
 
       config.headers['Authorization'] = `Bearer ${accessToken}`
