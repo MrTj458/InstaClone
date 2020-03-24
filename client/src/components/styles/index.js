@@ -28,3 +28,7 @@ export const Input = styled.input`
   margin: 0;
   border-color: ${props => (props.error ? 'red' : '#e3e3e3')};
 `
+
+export const FormControl = styled.div`
+  margin-bottom: 20px;
+`

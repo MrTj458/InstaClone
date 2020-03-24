@@ -1,12 +1,17 @@
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import UserSerializer, LoginSerializer
 from .permissions import UserViewPermissions
+
+from posts.models import Post
+from posts.serializers import PostSerializer
 
 
 class UserViewSet(GenericViewSet, RetrieveModelMixin):
@@ -35,6 +40,13 @@ class UserViewSet(GenericViewSet, RetrieveModelMixin):
         user.is_active = False
         user.save()
         return Response(None, status.HTTP_204_NO_CONTENT)
+
+    @action(methods=['get'], detail=True)
+    def posts(self, request, username=None):
+        user = get_object_or_404(get_user_model(), username=username)
+        posts = user.post_set.all().order_by('-created_at')
+        serialized_posts = PostSerializer(posts, many=True)
+        return Response(serialized_posts.data)
 
 
 class AuthViewSet(GenericViewSet):

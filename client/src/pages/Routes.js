@@ -6,6 +6,7 @@ import Home from './Home'
 import AuthPage from './AuthPage'
 import NotFound from './404'
 import ProfilePage from './ProfilePage'
+import CreatePostPage from './CreatePostPage'
 
 export default function Routes() {
   return (
@@ -13,6 +14,10 @@ export default function Routes() {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+
+        <Route exact path="/new">
+          <CreatePostPage />
         </Route>
 
         {/* Auth Routes */}

@@ -75,7 +75,7 @@ export default function NavBar() {
           {user.id ? (
             // Logged in links
             <>
-              <NavLink style={{ marginLeft: '10px' }} to="/">
+              <NavLink style={{ marginLeft: '10px' }} to="/new">
                 <i className="fas fa-plus fa-2x"></i>
               </NavLink>
               <NavLink to={`/${user.username}`}>

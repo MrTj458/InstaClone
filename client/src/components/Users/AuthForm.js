@@ -5,11 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { loginUser, userSelector, registerUser } from '../../state/userSlice'
 import Spinner from '../Spinner'
-import { Button, Input } from '../styles'
-
-const FormControl = styled.div`
-  margin-bottom: 20px;
-`
+import { Button, Input, FormControl } from '../styles'
 
 const ToggleButton = styled.button`
   display: block;
