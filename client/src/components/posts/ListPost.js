@@ -70,7 +70,7 @@ const Description = styled.div`
 
 const Comments = styled.div``
 
-export default function Post({ post }) {
+export default function ListPost({ post }) {
   const { user } = useSelector(userSelector)
 
   const liked = post.likes.includes(user.id)

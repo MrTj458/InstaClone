@@ -29,7 +29,7 @@ export default function ProfilePage() {
     <>
       <h1>Profile for {user.username}</h1>
       <img src={user.profile.image} alt="Avatar" />
-      <Posts username={params.username} />
+      <Posts username={params.username} initialStyle="grid" />
     </>
   )
 }
