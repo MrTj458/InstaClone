@@ -41,14 +41,6 @@ class UserViewSet(GenericViewSet, RetrieveModelMixin):
         user.save()
         return Response(None, status.HTTP_204_NO_CONTENT)
 
-    @action(methods=['get'], detail=True)
-    def posts(self, request, username=None):
-        user = get_object_or_404(get_user_model(), username=username)
-        posts = user.post_set.all().order_by('-created_at')
-        serialized_posts = PostSerializer(
-            posts, many=True, context={'request': request})
-        return Response(serialized_posts.data)
-
 
 class AuthViewSet(GenericViewSet):
     serializer_class = UserSerializer

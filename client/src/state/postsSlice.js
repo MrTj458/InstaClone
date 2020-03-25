@@ -3,13 +3,23 @@ import axios from 'axios'
 
 const postsSlice = createSlice({
   name: 'posts',
-  initialState: { posts: [], errors: '', loading: true },
+  initialState: {
+    posts: [],
+    count: 0,
+    next: null,
+    previous: null,
+    errors: '',
+    loading: true,
+  },
   reducers: {
     postsLoading: state => {
       state.loading = true
     },
     getPostsSuccess: (state, { payload }) => {
-      state.posts = payload
+      state.posts = payload.results
+      state.count = payload.count
+      state.next = payload.next
+      state.previous = payload.previous
       state.loading = false
       state.errors = ''
     },
@@ -33,7 +43,7 @@ export function getPostsForUser(username) {
     dispatch(postsLoading())
 
     try {
-      const res = await axios.get(`/api/users/${username}/posts/`)
+      const res = await axios.get(`/api/posts/?username=${username}`)
       const data = res.data
 
       dispatch(getPostsSuccess(data))
