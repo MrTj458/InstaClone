@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
-
 import { useDispatch, useSelector } from 'react-redux'
+
 import { postSelector, createPost } from '../../state/postSlice'
 import { useHistory } from 'react-router-dom'
-
 import { Button, FormControl } from '../styles'
+import Spinner from '../Spinner'
 
 const Container = styled.div`
   display: flex;
@@ -85,9 +85,7 @@ const PreviewImage = styled.img`
 export default function PostForm() {
   const history = useHistory()
   const dispatch = useDispatch()
-  const { errors } = useSelector(postSelector)
-
-  console.log(errors)
+  const { errors, loading } = useSelector(postSelector)
 
   const [filePreview, setFilePreview] = useState()
   const [description, setDescription] = useState('')
@@ -107,7 +105,7 @@ export default function PostForm() {
     <Container>
       <h1>Create a Post</h1>
       <form onSubmit={handleSubmit}>
-        <fieldset>
+        <fieldset disabled={loading}>
           <FormControl>
             <FileInput
               ref={fileRef}
@@ -137,7 +135,7 @@ export default function PostForm() {
             {errors.description && <small>{errors.description[0]}</small>}
           </FormControl>
 
-          <Button fill="true">Post</Button>
+          <Button fill="true">{loading ? <Spinner /> : 'Post'}</Button>
         </fieldset>
       </form>
     </Container>

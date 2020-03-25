@@ -17,6 +17,12 @@ export const Button = styled.button`
   }
 `
 
+export const GhostButton = styled(Button)`
+  background: 0;
+  color: #000;
+  padding: 0;
+`
+
 export const Input = styled.input`
   display: block;
   width: 100%;

@@ -62,7 +62,7 @@ class AuthViewSet(GenericViewSet):
         refresh = RefreshToken.for_user(user)
 
         return Response({
-            'user': UserSerializer(user).data,
+            'user': UserSerializer(user, context={'request': request}).data,
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         })

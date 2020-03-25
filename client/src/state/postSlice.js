@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const postSlice = createSlice({
   name: 'posts',
-  initialState: { post: {}, errors: {}, loading: true },
+  initialState: { post: {}, errors: {}, loading: false },
   reducers: {
     postLoading: state => {
       state.loading = true

@@ -9,7 +9,7 @@ const postsSlice = createSlice({
     next: null,
     previous: null,
     errors: '',
-    loading: true,
+    loading: false,
   },
   reducers: {
     postsLoading: state => {
@@ -44,6 +44,21 @@ export function getPostsForUser(username) {
 
     try {
       const res = await axios.get(`/api/posts/?username=${username}`)
+      const data = res.data
+
+      dispatch(getPostsSuccess(data))
+    } catch (err) {
+      dispatch(getPostsError(err.message))
+    }
+  }
+}
+
+export function getPosts() {
+  return async dispatch => {
+    dispatch(postsLoading())
+
+    try {
+      const res = await axios.get(`/api/posts/`)
       const data = res.data
 
       dispatch(getPostsSuccess(data))

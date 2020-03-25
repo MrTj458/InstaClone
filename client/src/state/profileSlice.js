@@ -33,7 +33,7 @@ export function fetchProfile(username) {
     dispatch(profileLoading())
 
     try {
-      const res = await axios.get(`/api/users/${username}`)
+      const res = await axios.get(`/api/users/${username}/`)
       const data = res.data
 
       dispatch(getProfileSuccess(data))
