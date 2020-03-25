@@ -45,7 +45,8 @@ class UserViewSet(GenericViewSet, RetrieveModelMixin):
     def posts(self, request, username=None):
         user = get_object_or_404(get_user_model(), username=username)
         posts = user.post_set.all().order_by('-created_at')
-        serialized_posts = PostSerializer(posts, many=True)
+        serialized_posts = PostSerializer(
+            posts, many=True, context={'request': request})
         return Response(serialized_posts.data)
 
 
