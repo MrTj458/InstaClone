@@ -18,6 +18,7 @@ const ProfileContainer = styled.div`
     width: 150px;
     height: 150px;
     margin-right: 30px;
+    border-radius: 50%;
   }
 `
 
