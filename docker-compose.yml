@@ -18,6 +18,15 @@ services:
     depends_on:
       - db
 
+  client:
+    build: ./client
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    command: sh -c "npm start"
+
   db:
     image: postgres:alpine
     environment:
