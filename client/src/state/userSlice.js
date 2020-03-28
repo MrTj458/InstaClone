@@ -35,6 +35,12 @@ export function fetchUser() {
       dispatch(getUserSuccess(user))
     } catch (e) {
       dispatch(getUserFailure(e.message))
+      // The access / refresh token is no longer valid.
+      // This is probably caused by the database being reset
+      // and should only happen in testing.
+      localStorage.clear('refresh')
+      localStorage.clear('access')
+      window.location.reload()
     }
   }
 }
