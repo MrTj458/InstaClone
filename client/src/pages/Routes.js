@@ -7,6 +7,7 @@ import AuthPage from './AuthPage'
 import NotFound from './404'
 import ProfilePage from './ProfilePage'
 import CreatePostPage from './CreatePostPage'
+import SettingsPage from './SettingsPage'
 
 export default function Routes() {
   return (
@@ -18,6 +19,10 @@ export default function Routes() {
 
         <Route exact path="/new">
           <CreatePostPage />
+        </Route>
+
+        <Route exact path="/settings">
+          <SettingsPage />
         </Route>
 
         {/* Auth Routes */}

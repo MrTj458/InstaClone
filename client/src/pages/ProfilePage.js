@@ -19,13 +19,6 @@ const ProfileContainer = styled.div`
     height: 150px;
     margin-right: 30px;
   }
-
-  /* @media (max-width: 700px) {
-    img {
-      width: 100px;
-      height: 100px;
-    }
-  } */
 `
 
 const ProfileUser = styled.div`
