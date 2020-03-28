@@ -69,10 +69,6 @@ export default function Posts({ username, initialStyle = 'list' }) {
   if (loading) return <Spinner />
   if (error) return <p>{error}</p>
 
-  if (posts.length === 0) {
-    return <h2>This user has no posts</h2>
-  }
-
   return (
     <Container>
       <Options>
@@ -89,6 +85,10 @@ export default function Posts({ username, initialStyle = 'list' }) {
           <i className="fas fa-border-all fa-2x"></i>
         </StyleButton>
       </Options>
+
+      {posts.length === 0 && (
+        <h3 style={{ textAlign: 'center' }}>No posts found.</h3>
+      )}
 
       {style === 'list' ? (
         <ListContainer>

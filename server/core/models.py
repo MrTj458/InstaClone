@@ -7,6 +7,9 @@ from PIL import Image
 class User(AbstractUser):
     email = models.EmailField(unique=True)
 
+    def num_posts(self):
+        return self.post_set.count()
+
 
 class Profile(models.Model):
     user = models.OneToOneField(get_user_model(), models.CASCADE)
