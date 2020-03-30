@@ -1,20 +1,21 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin
+from rest_framework.mixins import RetrieveModelMixin
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import UserSerializer, LoginSerializer
 from .permissions import UserViewPermissions
 
-from posts.models import Post
-from posts.serializers import PostSerializer
-
 
 class UserViewSet(GenericViewSet, RetrieveModelMixin):
+    """
+    User retrieve, create and delete.
+
+    Lookup users by username ex: ```/api/users/username-here```
+    """
     permission_classes = [UserViewPermissions]
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
@@ -43,7 +44,11 @@ class UserViewSet(GenericViewSet, RetrieveModelMixin):
 
 
 class AuthViewSet(GenericViewSet):
-    serializer_class = UserSerializer
+    """
+    Login a user or get the currently authorized user.
+
+    Token headers should be sent as ```{'Authorization': 'Bearer tokenGoesHere'}```
+    """
 
     def list(self, request):
         """Get the currently authenticated user"""
@@ -66,3 +71,8 @@ class AuthViewSet(GenericViewSet):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         })
+
+    def get_serializer_class(self):
+        if self.action in ['create']:
+            return LoginSerializer
+        return UserSerializer

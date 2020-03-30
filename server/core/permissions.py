@@ -3,7 +3,7 @@ from rest_framework.permissions import BasePermission
 
 class UserViewPermissions(BasePermission):
     def has_permission(self, request, view):
-        if view.action in ['create', 'retrieve', 'posts']:
+        if view.action in ['list', 'create', 'retrieve']:
             """Allow anyone to create an account"""
             return True
 

@@ -8,6 +8,11 @@ from .permissions import PostsPermissions
 
 
 class PostsViewSet(ModelViewSet):
+    """
+    Post crud actions.
+
+    Posts can be filtered by username ex: ```/api/posts?username=username-here```
+    """
     queryset = Post.objects.all().order_by('-created_at')
     permission_classes = [PostsPermissions]
 
