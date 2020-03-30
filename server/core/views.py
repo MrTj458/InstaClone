@@ -1,24 +1,26 @@
 from django.contrib.auth import get_user_model
 from rest_framework import status
+from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.mixins import RetrieveModelMixin
+from rest_framework.mixins import RetrieveModelMixin, ListModelMixin
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import UserSerializer, LoginSerializer
 from .permissions import UserViewPermissions
 
 
-class UserViewSet(GenericViewSet, RetrieveModelMixin):
+class UserViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
     """
     User retrieve, create and delete.
 
-    Lookup users by username ex: ```/api/users/username-here```
+    Retrieve users by username instead of id ex: ```/api/users/username-here```
+
+    Search for users by username with ```/api/users/?search=search-term-here```
     """
     permission_classes = [UserViewPermissions]
     serializer_class = UserSerializer
-    queryset = get_user_model().objects.all()
     lookup_field = 'username'
 
     def create(self, request):
@@ -42,12 +44,23 @@ class UserViewSet(GenericViewSet, RetrieveModelMixin):
         user.save()
         return Response(None, status.HTTP_204_NO_CONTENT)
 
+    def get_queryset(self):
+        if self.action in ['list']:
+            term = self.request.query_params.get('search')
+            if term:
+                return get_user_model().objects.filter(username__contains=term)
+            raise NotFound(
+                detail='A search query must be provided.')
+        return get_user_model().objects.all()
+
 
 class AuthViewSet(GenericViewSet):
     """
     Login a user or get the currently authorized user.
 
     Token headers should be sent as ```{'Authorization': 'Bearer tokenGoesHere'}```
+
+    To refresh access token, send a post request to ```/api/auth/refresh/```
     """
 
     def list(self, request):
