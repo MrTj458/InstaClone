@@ -2,6 +2,10 @@ from rest_framework.permissions import BasePermission
 
 
 class PostsPermissions(BasePermission):
+    """
+    Permissions for posts actions.
+    """
+
     def has_permission(self, request, view):
         if view.action in ['list', 'retrieve']:
             return True

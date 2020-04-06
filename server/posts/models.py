@@ -4,6 +4,9 @@ from django.utils import timezone
 
 
 class Post(models.Model):
+    """
+    Post model.
+    """
     author = models.ForeignKey(get_user_model(), models.CASCADE)
     image = models.ImageField(upload_to='posts')
     created_at = models.DateTimeField(default=timezone.now)
@@ -12,6 +15,9 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    """
+    Comment model.
+    """
     post = models.ForeignKey(Post, models.CASCADE, related_name='comments')
     author = models.ForeignKey(
         get_user_model(), models.CASCADE, related_name='comments')

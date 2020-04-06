@@ -5,13 +5,24 @@ from PIL import Image
 
 
 class User(AbstractUser):
+    """
+    User model.
+    """
     email = models.EmailField(unique=True)
 
     def num_posts(self):
+        """Get the number of posts this user has created.
+
+        Returns:
+            Integer -- Number of posts this user has created.
+        """
         return self.post_set.count()
 
 
 class Profile(models.Model):
+    """
+    Profile Model.
+    """
     user = models.OneToOneField(get_user_model(), models.CASCADE)
     image = models.ImageField(upload_to='avatars', default='default.png')
 

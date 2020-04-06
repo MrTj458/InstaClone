@@ -5,12 +5,18 @@ from . import models
 
 
 class ProfileInline(admin.StackedInline):
+    """
+    Display profile as an inline item.
+    """
     model = models.Profile
     can_delete = False
     verbose_name_plural = 'profile'
 
 
 class UserAdmin(BaseUserAdmin):
+    """
+    Display User along with their profile.
+    """
     inlines = [ProfileInline]
 
 

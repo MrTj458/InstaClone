@@ -5,6 +5,9 @@ from .models import Profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    """
+    Base Profile serializer.
+    """
     class Meta:
         model = Profile
         fields = ['image']
@@ -12,6 +15,9 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Base User serializer.
+    """
     profile = ProfileSerializer(read_only=True)
 
     class Meta:
@@ -27,6 +33,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.Serializer):
+    """
+    Serializer for login information
+    """
     username = serializers.CharField()
     password = serializers.CharField(trim_whitespace=False, style={
         'input_type': 'password'})
