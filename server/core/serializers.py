@@ -29,10 +29,10 @@ class UserSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(trim_whitespace=False, style={
-                                     'input_type': 'password'})
+        'input_type': 'password'})
 
-    def validate(self, data):
-        user = authenticate(**data)
+    def validate(self, attrs):
+        user = authenticate(**attrs)
 
         if not user or not user.is_active:
             raise serializers.ValidationError(

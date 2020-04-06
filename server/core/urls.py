@@ -2,8 +2,8 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from . import views
 from posts import views as post_views
+from . import views
 
 router = DefaultRouter()
 

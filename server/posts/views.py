@@ -1,6 +1,4 @@
-from rest_framework.viewsets import GenericViewSet, ModelViewSet
-from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin
-from rest_framework.pagination import PageNumberPagination
+from rest_framework.viewsets import ModelViewSet
 
 from .models import Post
 from .serializers import PostSerializer, PostUpdateSerializer
